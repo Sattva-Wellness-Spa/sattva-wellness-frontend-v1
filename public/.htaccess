@@ -1,0 +1,25 @@
+# Sattva Wellness Spa: Apache settings for cPanel / MilesWeb.
+# This file lives in public/, so `npm run build` copies it into out/ automatically.
+
+DirectoryIndex index.html
+Options -Indexes
+ErrorDocument 404 /404.html
+
+<IfModule mod_headers.c>
+  # Hashed build files never change: let browsers cache them for a year.
+  <If "%{REQUEST_URI} =~ m#^/_next/static/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+  # Pages are revalidated on every visit so a new upload shows up straight away.
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
+
+# Once SSL is active on the domain, uncomment to send every visitor to https://www.
+# <IfModule mod_rewrite.c>
+#   RewriteEngine On
+#   RewriteCond %{HTTPS} off [OR]
+#   RewriteCond %{HTTP_HOST} !^www\. [NC]
+#   RewriteRule ^ https://www.sattvawellnessspa.com%{REQUEST_URI} [L,R=301]
+# </IfModule>
