@@ -1,0 +1,82 @@
+"use client";
+
+import { useBranch } from "@/context/BranchContext";
+import { BRANCHES, BRANCH_KEYS } from "@/data/branches";
+import { site } from "@/data/site";
+import { copyText } from "@/lib/clipboard";
+import { useToast } from "./Toast";
+
+export default function Branches() {
+  const { branchKey, setBranch, goToBooking } = useBranch();
+  const toast = useToast();
+
+  function copy(raw: string) {
+    copyText(raw).then(
+      () => toast(`Number copied: ${raw}`),
+      () => toast(`Number: ${raw}`),
+    );
+  }
+
+  return (
+    <section className="branches band" id="branches">
+      <div className="wrap">
+        <div className="sec-head">
+          <div>
+            <div className="eyebrow">Our branches</div>
+            <h2>Two calm rooms in Gurugram</h2>
+          </div>
+          <p>
+            The same therapists&apos; training, the same menu and the same prices at both. Pick the
+            one closer to you and book directly with that branch.
+          </p>
+        </div>
+        <div className="bgrid">
+          {BRANCH_KEYS.map((key) => {
+            const b = BRANCHES[key];
+            return (
+              <article
+                key={key}
+                className={key === branchKey ? "br sel" : "br"}
+                id={`sector-${key}`}
+                data-card={key}
+              >
+                <span className="tag">{b.tag}</span>
+                <h3>{b.name}</h3>
+                <address>
+                  {b.addressLines[0]}
+                  <br />
+                  {b.addressLines[1]}
+                </address>
+                <dl className="hours">
+                  <dt>Call / WhatsApp</dt>
+                  <dd className="num">{b.phone}</dd>
+                  <dt>Open</dt>
+                  <dd>{site.hours}</dd>
+                </dl>
+                <div className="line">
+                  <button
+                    className="btn btn-primary"
+                    type="button"
+                    data-pick={key}
+                    onClick={() => {
+                      setBranch(key);
+                      goToBooking();
+                    }}
+                  >
+                    Book at {b.short}
+                  </button>
+                  <button className="mini" type="button" data-copy={b.raw} onClick={() => copy(b.raw)}>
+                    Copy number
+                  </button>
+                  <a className="mini" href={b.map} target="_blank" rel="noopener">
+                    Directions
+                  </a>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
