@@ -11,6 +11,8 @@ Layout, colours, copy, prices, numbers, ids, classes and `data-*` attributes mat
 - `<meta name="claude:viewport-fit-sides">` is omitted. It only applies inside the Claude artifact viewer, not on a real website.
 - The JSON-LD `<script>` is at the start of `<body>` instead of in `<head>`. Its content is identical, and Google reads JSON-LD in either place.
 - Added `sitemap.xml`, `robots.txt` and an SVG favicon, as the build prompt requested. The favicon shows only "स", because the full word "सत्त्व" is unreadable at 16px. It's drawn with the visitor's system Devanagari font.
+- Added a share image (`src/app/opengraph-image.png`, 1200 × 630, with alt text) and the `og:url`, `og:type`, `og:site_name` and `og:locale` tags, so links shared on WhatsApp and social media show a preview card. The Twitter card is `summary_large_image` for the same reason.
+- Added `apple-icon.png` (180 × 180, the "स" mark) for iPhone home-screen bookmarks.
 
 ## Behaviour
 

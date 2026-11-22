@@ -1,13 +1,13 @@
 "use client";
 
 import { useBranch } from "@/context/BranchContext";
-import { BRANCHES, BRANCH_KEYS } from "@/data/branches";
+import { BRANCHES, BRANCH_KEYS, telHref } from "@/data/branches";
 import { site } from "@/data/site";
 import { copyText } from "@/lib/clipboard";
 import { useToast } from "./Toast";
 
 export default function Branches() {
-  const { branchKey, setBranch, goToBooking } = useBranch();
+  const { branchKey, setBranch } = useBranch();
   const toast = useToast();
 
   function copy(raw: string) {
@@ -54,17 +54,15 @@ export default function Branches() {
                   <dd>{site.hours}</dd>
                 </dl>
                 <div className="line">
-                  <button
+                  <a
                     className="btn btn-primary"
-                    type="button"
+                    href={telHref(b)}
+                    title={`Call ${b.short}: ${b.phone}`}
                     data-pick={key}
-                    onClick={() => {
-                      setBranch(key);
-                      goToBooking();
-                    }}
+                    onClick={() => setBranch(key)}
                   >
                     Book at {b.short}
-                  </button>
+                  </a>
                   <button className="mini" type="button" data-copy={b.raw} onClick={() => copy(b.raw)}>
                     Copy number
                   </button>

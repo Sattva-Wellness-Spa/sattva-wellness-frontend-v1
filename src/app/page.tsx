@@ -3,6 +3,7 @@ import BookingForm from "@/components/BookingForm";
 import Couples from "@/components/Couples";
 import Elements from "@/components/Elements";
 import Faq from "@/components/Faq";
+import FloatingContact from "@/components/FloatingContact";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -30,6 +31,7 @@ export default function Home() {
           <Faq />
         </main>
         <Footer />
+        <FloatingContact />
       </ToastProvider>
     </BranchProvider>
   );

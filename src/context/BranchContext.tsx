@@ -2,7 +2,6 @@
 
 import {
   createContext,
-  useCallback,
   useContext,
   useMemo,
   useState,
@@ -82,8 +81,6 @@ interface BranchContextValue {
   /** Current value of the booking form's Therapy select. */
   therapy: string;
   setTherapy: (therapy: string) => void;
-  /** Optionally pre-select a therapy, smooth-scroll to #book, then focus the name field. */
-  goToBooking: (therapy?: string) => void;
 }
 
 const BranchContext = createContext<BranchContextValue | null>(null);
@@ -92,12 +89,6 @@ export function BranchProvider({ children }: { children: ReactNode }) {
   const branchKey = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const [therapy, setTherapy] = useState<string>(BOOKING_OPTIONS[0]);
 
-  const goToBooking = useCallback((item?: string) => {
-    if (item) setTherapy(item);
-    document.getElementById("book")?.scrollIntoView({ behavior: "smooth" });
-    window.setTimeout(() => document.getElementById("f-name")?.focus(), 500);
-  }, []);
-
   const value = useMemo<BranchContextValue>(
     () => ({
       branchKey,
@@ -105,9 +96,8 @@ export function BranchProvider({ children }: { children: ReactNode }) {
       setBranch: (key) => selectBranch(key, true),
       therapy,
       setTherapy,
-      goToBooking,
     }),
-    [branchKey, therapy, goToBooking],
+    [branchKey, therapy],
   );
 
   return <BranchContext.Provider value={value}>{children}</BranchContext.Provider>;
