@@ -3,7 +3,14 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useBranch } from "@/context/BranchContext";
 import { BOOKING_OPTIONS, DEFAULT_TIME_SLOT, DURATIONS, TIME_SLOTS } from "@/data/booking";
-import { BRANCHES, BRANCH_KEYS, isBranchKey, otherBranch, telHref } from "@/data/branches";
+import {
+  BRANCHES,
+  BRANCH_KEYS,
+  isBranchKey,
+  otherBranch,
+  telHref,
+  whatsappHref,
+} from "@/data/branches";
 import { site } from "@/data/site";
 import { useToast } from "./Toast";
 
@@ -72,7 +79,7 @@ export default function BookingForm() {
 
     // A real anchor click, so WhatsApp opens in a new tab like the reference.
     const a = document.createElement("a");
-    a.href = `https://wa.me/${loc.whatsapp}?text=${encodeURIComponent(msg)}`;
+    a.href = whatsappHref(loc, msg);
     a.target = "_blank";
     a.rel = "noopener";
     document.body.appendChild(a);

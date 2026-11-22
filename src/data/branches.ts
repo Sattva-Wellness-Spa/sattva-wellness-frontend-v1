@@ -15,6 +15,11 @@ export function telHref(branch: Branch): string {
   return `tel:+91${branch.raw}`;
 }
 
+/** wa.me link to this branch with the message already typed (the visitor still presses send). */
+export function whatsappHref(branch: Branch, message: string): string {
+  return `https://wa.me/${branch.whatsapp}?text=${encodeURIComponent(message)}`;
+}
+
 export interface Branch {
   key: BranchKey;
   /** "Sector 83" */
