@@ -1,7 +1,7 @@
 "use client";
 
 import { useBranch } from "@/context/BranchContext";
-import { telHref } from "@/data/branches";
+import { telHref, whatsappHref } from "@/data/branches";
 
 /**
  * Call Now and WhatsApp stay on screen while the page scrolls, and always use the
@@ -20,7 +20,7 @@ export default function FloatingContact() {
       </a>
       <a
         className="btn fab-wa"
-        href={`https://wa.me/${branch.whatsapp}?text=${encodeURIComponent(greeting)}`}
+        href={whatsappHref(branch, greeting)}
         target="_blank"
         rel="noopener"
         title={`WhatsApp ${branch.short}: ${branch.phone} (opens in a new tab)`}

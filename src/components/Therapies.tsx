@@ -1,5 +1,6 @@
 import { THERAPIES } from "@/data/therapies";
 import BookButton from "./BookButton";
+import WhatsAppLink from "./WhatsAppLink";
 
 export default function Therapies() {
   return (
@@ -25,9 +26,14 @@ export default function Therapies() {
               <p>{t.description}</p>
               <div className="price">
                 <strong>{t.price}</strong>
-                <BookButton className="book" item={t.name}>
-                  Book →
-                </BookButton>
+                <div className="acts">
+                  <BookButton className="book" item={t.name}>
+                    Call Now
+                  </BookButton>
+                  <WhatsAppLink className="book" item={t.name}>
+                    WhatsApp
+                  </WhatsAppLink>
+                </div>
               </div>
             </article>
           ))}

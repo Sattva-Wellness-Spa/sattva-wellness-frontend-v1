@@ -106,8 +106,9 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:col
 .menu{grid-template-columns:repeat(3,1fr)}
 @media (max-width:960px){.menu{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){.menu{grid-template-columns:1fr}}
-.price{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px dashed var(--line);padding-top:14px;margin-top:auto}
+.price{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;border-top:1px dashed var(--line);padding-top:14px;margin-top:auto}
 .price strong{font-family:var(--f-display);font-weight:400;font-size:1.6rem;font-variant-numeric:tabular-nums}
+.price .acts{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px}
 .couples{background:var(--surface);padding-block:72px}
 .cgrid{display:grid;gap:20px;margin-top:36px}
 .c{display:grid;grid-template-columns:1fr auto;gap:28px;background:var(--raised);border:1px solid var(--line);border-radius:18px;padding:28px;min-width:0}
