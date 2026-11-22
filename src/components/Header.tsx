@@ -61,7 +61,7 @@ export default function Header() {
             href={telHref(branch)}
             title={`Call ${branch.short}: ${branch.phone}`}
           >
-            Book
+            Contact Us
           </a>
         </div>
       </div>
