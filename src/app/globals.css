@@ -210,6 +210,8 @@ section[id],article[id]{scroll-margin-top:84px}
 .bgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:36px}
 .br{background:var(--raised);border:1px solid var(--line);border-radius:18px;padding:28px;display:grid;gap:12px;align-content:start;min-width:0;transition:border-color .2s,box-shadow .2s}
 .br.sel{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.br:not(.sel){cursor:pointer}
+.br:not(.sel):hover{border-color:color-mix(in srgb,var(--gold) 55%,var(--line))}
 .br .tag{justify-self:start;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--gold-soft);color:var(--ink);padding:3px 10px;border-radius:999px}
 .br h3{font-size:1.5rem}
 .br address{font-style:normal;color:var(--muted)}
