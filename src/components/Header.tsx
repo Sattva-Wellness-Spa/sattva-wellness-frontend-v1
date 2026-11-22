@@ -2,11 +2,11 @@
 
 import type { KeyboardEvent } from "react";
 import { useBranch } from "@/context/BranchContext";
-import { BRANCHES, BRANCH_KEYS, type BranchKey } from "@/data/branches";
+import { BRANCHES, BRANCH_KEYS, telHref, type BranchKey } from "@/data/branches";
 import { headerNav } from "@/data/site";
 
 export default function Header() {
-  const { branchKey, setBranch } = useBranch();
+  const { branchKey, branch, setBranch } = useBranch();
 
   // Radiogroup keyboard support: arrows move and select, Home/End jump to first/last.
   function onKeyDown(e: KeyboardEvent<HTMLButtonElement>, key: BranchKey) {
@@ -56,7 +56,11 @@ export default function Header() {
               </button>
             ))}
           </div>
-          <a className="btn btn-primary hide-sm" href="#book">
+          <a
+            className="btn btn-primary hide-sm"
+            href={telHref(branch)}
+            title={`Call ${branch.short}: ${branch.phone}`}
+          >
             Book
           </a>
         </div>

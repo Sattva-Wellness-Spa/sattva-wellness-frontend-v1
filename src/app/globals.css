@@ -221,6 +221,21 @@ section[id],article[id]{scroll-margin-top:84px}
 .f-br{display:grid;gap:6px}
 .f-br b{color:var(--ink);font-weight:600}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:.7em 1.2em;border-radius:999px;font-size:.9rem;z-index:20}
+/* Floating Call Now / WhatsApp (not in the reference). They use the selected branch's number.
+   Side by side along the bottom up to 900px wide, stacked in the bottom-right corner above that.
+   Fixed colours (same in light and dark mode), with dark text for contrast. */
+.fab{position:fixed;z-index:15;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;gap:10px;pointer-events:none}
+.fab .btn{pointer-events:auto;flex:1;max-width:220px;justify-content:center;white-space:nowrap;padding-inline:.9em;box-shadow:0 8px 24px rgba(0,0,0,.22)}
+.fab-call{background:#E8B44A;color:#1D2924}
+.fab-call:hover{background:#D9A23A}
+.fab-wa{background:#25D366;color:#0B2B1C}
+.fab-wa:hover{background:#1EBE5A}
+.fab svg{width:20px;height:20px;flex:none}
+@media (min-width:901px){.fab{left:auto;right:max(20px,env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));flex-direction:column}.fab .btn{flex:none;padding-inline:1.4em}}
+/* Keep the toast, the end of the footer and keyboard focus clear of the bottom bar. */
+@media (max-width:900px){.toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}footer{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}html{scroll-padding-bottom:84px}}
+@media (max-width:340px){.fab svg{display:none}}
+@media (max-height:240px){.fab{display:none}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
 /* Second <style> block from the reference */

@@ -10,6 +10,11 @@ export function otherBranch(key: BranchKey): BranchKey {
   return key === "83" ? "64" : "83";
 }
 
+/** tel: link that opens the phone dialer with this branch's number. */
+export function telHref(branch: Branch): string {
+  return `tel:+91${branch.raw}`;
+}
+
 export interface Branch {
   key: BranchKey;
   /** "Sector 83" */

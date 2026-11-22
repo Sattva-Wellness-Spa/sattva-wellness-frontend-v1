@@ -29,10 +29,16 @@ export const metadata: Metadata = {
   title: site.title,
   description: site.description,
   alternates: { canonical: site.url },
+  // The share image comes from opengraph-image.png in this folder.
   openGraph: {
+    type: "website",
+    url: site.url,
+    siteName: site.name,
+    locale: "en_IN",
     title: site.ogTitle,
     description: site.ogDescription,
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {

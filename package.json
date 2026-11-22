@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:zip": "next build && node scripts/zip-site.mjs",
     "start": "next start",
     "lint": "eslint"
   },

@@ -2,9 +2,10 @@
 
 import type { ReactNode } from "react";
 import { useBranch } from "@/context/BranchContext";
+import { telHref } from "@/data/branches";
 
 interface BookButtonProps {
-  /** Value to pre-select in the booking form's Therapy select */
+  /** Therapy, ritual or package this button is for (kept as the reference's data-t attribute) */
   item: string;
   className: string;
   /** Adds the reference's data-book attribute (couples and packages buttons) */
@@ -12,17 +13,18 @@ interface BookButtonProps {
   children: ReactNode;
 }
 
+/** Calls the branch selected in the header, so the visitor books by phone with that sector. */
 export default function BookButton({ item, className, dataBook, children }: BookButtonProps) {
-  const { goToBooking } = useBranch();
+  const { branch } = useBranch();
   return (
-    <button
-      type="button"
+    <a
       className={className}
+      href={telHref(branch)}
+      title={`Call ${branch.short}: ${branch.phone}`}
       data-t={item}
       data-book={dataBook ? "" : undefined}
-      onClick={() => goToBooking(item)}
     >
       {children}
-    </button>
+    </a>
   );
 }
