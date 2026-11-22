@@ -3,19 +3,9 @@
 import { useBranch } from "@/context/BranchContext";
 import { BRANCHES, BRANCH_KEYS, telHref } from "@/data/branches";
 import { site } from "@/data/site";
-import { copyText } from "@/lib/clipboard";
-import { useToast } from "./Toast";
 
 export default function Branches() {
   const { branchKey, setBranch } = useBranch();
-  const toast = useToast();
-
-  function copy(raw: string) {
-    copyText(raw).then(
-      () => toast(`Number copied: ${raw}`),
-      () => toast(`Number: ${raw}`),
-    );
-  }
 
   return (
     <section className="branches band" id="branches">
@@ -33,12 +23,16 @@ export default function Branches() {
         <div className="bgrid">
           {BRANCH_KEYS.map((key) => {
             const b = BRANCHES[key];
+            // A click anywhere on the card, including its buttons, selects this branch.
+            // Keyboard users switch branches with the header switch.
             return (
               <article
                 key={key}
                 className={key === branchKey ? "br sel" : "br"}
                 id={`sector-${key}`}
                 data-card={key}
+                aria-current={key === branchKey ? "true" : undefined}
+                onClick={() => setBranch(key)}
               >
                 <span className="tag">{b.tag}</span>
                 <h3>{b.name}</h3>
@@ -59,13 +53,16 @@ export default function Branches() {
                     href={telHref(b)}
                     title={`Call ${b.short}: ${b.phone}`}
                     data-pick={key}
-                    onClick={() => setBranch(key)}
                   >
                     Book at {b.short}
                   </a>
-                  <button className="mini" type="button" data-copy={b.raw} onClick={() => copy(b.raw)}>
-                    Copy number
-                  </button>
+                  <a
+                    className="mini"
+                    href={telHref(b)}
+                    title={`Call ${b.short}: ${b.phone}`}
+                  >
+                    Call Now
+                  </a>
                   <a className="mini" href={b.map} target="_blank" rel="noopener">
                     Directions
                   </a>
