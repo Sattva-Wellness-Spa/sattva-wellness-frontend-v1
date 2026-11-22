@@ -3,9 +3,8 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useBranch } from "@/context/BranchContext";
 import { BOOKING_OPTIONS, DEFAULT_TIME_SLOT, DURATIONS, TIME_SLOTS } from "@/data/booking";
-import { BRANCHES, BRANCH_KEYS, isBranchKey, otherBranch } from "@/data/branches";
+import { BRANCHES, BRANCH_KEYS, isBranchKey, otherBranch, telHref } from "@/data/branches";
 import { site } from "@/data/site";
-import { copyText } from "@/lib/clipboard";
 import { useToast } from "./Toast";
 
 /** yyyy-mm-dd in the visitor's local time zone (what <input type="date"> expects). */
@@ -34,13 +33,6 @@ export default function BookingForm() {
     input.min = localISODate(today);
     if (!input.value) input.value = localISODate(tomorrow);
   }, []);
-
-  function copyBranchNumber() {
-    copyText(branch.raw).then(
-      () => toast(`Number copied: ${branch.raw}`),
-      () => toast(`Call or WhatsApp ${branch.phone}`),
-    );
-  }
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -219,9 +211,9 @@ export default function BookingForm() {
                 <span className="phone" data-b="phone">
                   {branch.phone}
                 </span>
-                <button className="mini" type="button" data-copy-branch="" onClick={copyBranchNumber}>
-                  Copy
-                </button>
+                <a className="mini" href={telHref(branch)} title={`Call ${branch.short}: ${branch.phone}`}>
+                  Call Now
+                </a>
                 <a className="mini" data-b-map="" href={branch.map} target="_blank" rel="noopener">
                   Directions
                 </a>
